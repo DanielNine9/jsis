@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 15px;
+      background-color: #333;
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      opacity: .8;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      flex-direction: column;
+    }
+
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: move;
+      position: relative;
+    }
+
+    .red {
+      background-color: red;
+
+    }
+
+    .absolute {
+      position: absolute;
+      left: 3px;
+      color: black;
+      transform: translateY(-50%);
+      top: 50%;
+      z-index: 3;
+    }
+
+    #dragme {
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #000;
+      color: #fff;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Drag & drop element</h1>
+    <nav>
+      <a href="/bai1/index.html">Bài 1</a>
+      <a href="/bai2/index.html">Bài 2</a>
+      <a href="/bai3/index.html">Bài 3</a>
+      <a href="/bai4/index.html">Bài 4</a>
+      <a href="/bai5/index.html">Bài 5</a>
+    </nav>
+  </header>
+  <main>
+    <div class="box" ondragover="nDrop(event)" ondrop="dDrop(event)">
+      <span class="absolute">1</span>
+      <div id="dragme" class="box red" draggable="true" ondragstart="dStart(event)">
+        Drag Me Please!
+      </div>
+    </div>
+    <div class="box" ondrop="dDrop(event)" ondragover="nDrop(event)">
+      <span class="absolute">2</span>
+    </div>
+  </main>
+  
+  <footer>
+    &copy; huydqpc07859
+  </footer>
+  <script>
+    let holderItem;
+
+    function dStart(event) {
+      console.log(event)
+      holderItem = event.target;
+    }
+
+    function nDrop(event) {
+      event.preventDefault();
+    }
+
+    function dDrop(event) {
+      event.preventDefault();
+      if (event.target.className == "box") {
+        event.target.appendChild(holderItem);
+      }
+    }
+  </script>
+</body>
+
+</html>

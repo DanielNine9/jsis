@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 500px;
+            height: 500px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <img onload="load()" alt="" onmouseout="anh2()" onmouseover="anh()">
+    <script>
+        const img = document.querySelector('img')
+        function load() {
+            img.src = "https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg"
+            img.src = "https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-Viet-Nam.jpg"
+
+        }
+        function anh() {
+            img.src = "https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-Viet-Nam.jpg"
+        }
+        function anh2(){
+            img.src = "https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg"
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div class="shape" id="square" style="width : 100px ; height : 100px ; background-color : gray;"></div>
+   <p class="unique">Click here for magic</p>
+    <script>
+ window.onload = function(){
+    document.getElementById('square').addEventListener('click', changeColor)
+
+ }
+
+ function changeColor(){
+    let red = Math.floor(Math.random()* 256);
+    let green = Math.floor(Math.random()* 256);
+    let blue = Math.floor(Math.random()* 256);
+    this.style.backgroundColor = `rgb(${red},${green}, ${blue})`
+ }
+    </script>
+</body>
+</html>

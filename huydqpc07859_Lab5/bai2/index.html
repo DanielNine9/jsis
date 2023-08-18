@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <title>Lab 5 - Đặt mua hàng</title>
+  <style>
+    /* CSS code */
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 15px;
+      background-color: #333;
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      opacity: .8;
+    }
+
+    main {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 80vh;
+      margin: 0;
+      padding: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 10px;
+    }
+
+    th,
+    td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    th,
+    td,
+    button {
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #cart {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #000;
+      color: #fff;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Shop</h1>
+    <nav>
+      <a href="/bai1/index.html">Bài 1</a>
+      <a href="/bai2/index.html">Bài 2</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="product">
+      <h2 style="text-align: center;">Danh mục hàng hóa</h2>
+      <table>
+        <tr>
+          <td>iPhone 9</td>
+          <td data-price="2000000">2,000,000 đ</td>
+          <td><button onclick="them(this)">Thêm</button></td>
+        </tr>
+        <tr>
+          <td>Samsung Galaxy S20</td>
+          <td data-price="2500000">2,500,000 đ</td>
+          <td><button onclick="them(this)">Thêm</button></td>
+        </tr>
+        <tr>
+          <td>Google Pixel 4</td>
+          <td data-price="1800000">1,800,000 đ</td>
+          <td><button onclick="them(this)">Thêm</button></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="total">
+      Tổng tiền: <span id="tong">0 đ</span>
+    </div>
+    
+
+    <div id="cart-container">
+      <table id="cart">
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Đơn giá</th>
+          <th>Xóa</th>
+        </tr>
+      </table>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; huydqpc07859
+  </footer>
+
+  <script>
+    function them(button) {
+      var cart = document.getElementById("cart");
+      var rows = cart.getElementsByTagName("tr");
+      if (rows.length > 5) {
+        document.getElementById("cart-container").style.overflowY = "scroll";
+      }
+
+      var row = button.parentElement.parentElement.cloneNode(true);
+      var btnXoa = row.getElementsByTagName("button")[0];
+      btnXoa.innerText = "Xóa";
+      btnXoa.setAttribute('onclick', 'xoa(this)');
+      cart.appendChild(row);
+      tinhTong();
+    }
+
+    function xoa(button) {
+      var row = button.parentElement.parentElement;
+      document.getElementById("cart").removeChild(row);
+      tinhTong();
+    }
+
+    function xoaTatCa() {
+      var cart = document.getElementById("cart");
+      while (cart.firstChild) {
+        cart.removeChild(cart.firstChild);
+      }
+      tinhTong();
+    }
+
+    function tinhTong() {
+      var cart = document.getElementById("cart");
+      var rows = cart.getElementsByTagName("tr");
+      var tong = 0;
+
+      for (var i = 1; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName("td");
+        var price = cells[1].getAttribute("data-price");
+        tong += parseFloat(price);
+      }
+
+      document.getElementById("tong").innerText = tong.toLocaleString() + " đ";
+    }
+  </script>
+</body>
+
+</html>

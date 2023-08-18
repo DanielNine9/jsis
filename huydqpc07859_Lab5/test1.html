@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        label {
+            display: inline;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"] {
+            margin-right: 10px;
+        }
+
+        button[type="button"] {
+            background-color: #f44336;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Tùy chỉnh style cho div hiển thị thông tin người dùng */
+        #userInfo {
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="myForm">
+        <div>
+            <label for="firstname">Tên sản phẩm</label>
+            <input type="text" id="firstname" name="firstname" required>
+            <div class="error" id="firstnameError"></div>
+        </div>
+        <div>
+            <label for="price">Giá</label>
+            <input type="text" id="price" name="price" required>
+            <div class="error" id="priceError"></div>
+        </div>
+        <div>
+            <label for="discount">Giá khuyến mãi</label>
+            <input type="text" id="discount" name="discount" required>
+            <div class="error" id="discountError"></div>
+        </div>
+        <div>
+            <label for="producer">Nhà sản xuất:</label>
+            <select id="producer" name="producer" required>
+                <option value="" disabled selected>Chọn nhà sản xuất</option>
+                <option value="Apple">Apple</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Oppo">Oppo</option>
+                <option value="Xiaomi">Xiaomi</option>
+            </select>
+            <div class="error" id="producerError"></div>
+        </div>
+        <div>
+            <label>Màu sắc:</label>
+            <input type="checkbox" id="male" name="color" value="male" required checked>
+            <label for="Đen">Đen</label>
+            <input type="checkbox" id="female" name="color" value="female" required>
+            <label for="Vàng">Vàng</label>
+            <input type="checkbox" id="female" name="color" value="female" required>
+            <label for="Trắng">Trắng</label>
+            <div class="error" id="colorError"></div>
+        </div>
+        <div>
+            <label>Tính năng</label>
+            <input type="radio" id="male" name="feature" value="male" required checked>
+            <label for="Đen">Night Mode</label>
+            <input type="radio" id="female" name="feature" value="female" required>
+            <label for="Vàng">Ultra Wide</label>
+            <input type="radio" id="female" name="feature" value="female" required>
+            <label for="Trắng">Time Lapse</label>
+            <div class="error" id="featureError"></div>
+        </div>
+
+        <button type="button" onclick="return validateForm()">Submit</button>
+
+    </form>
+    <div id="userInfo"></div>
+    <script>
+
+
+        function validateForm() {
+            const name = document.querySelector('#firstname')
+            const price = document.querySelector('#price')
+            const discount = document.querySelector('#discount')
+            const producer = document.querySelector('#producer')
+            const colors = Array.from(document.querySelectorAll('input[name="color"]:checked'))
+            const feature = document.querySelector('input[name="feature"]:checked')?.value;
+
+            const nameError = document.getElementById("firstnameError");
+            const priceError = document.getElementById("priceError");
+            const discountError = document.getElementById("discountError");
+            const producerError = document.getElementById("producerError");
+            const colorError = document.getElementById("colorError");
+            const featureError = document.getElementById("featureError");
+            const checkError = document.getElementById("checkError");
+            const errors = document.querySelectorAll('.error')
+            errors.forEach(e => e.textContent = '')
+
+            if (name.value === '' || name.value.length < 6 || name.value.length > 26) {
+                nameError.textContent = "sai"
+            }
+            if (price.value === '' || Number(price.value) < 0) {
+                priceError.textContent = "sai"
+            }
+            if (discount.value === '' || Number(discount.value) >= Number(price.value)) {
+                discountError.textContent = "sai"
+            }
+            if (producer.value === '') {
+                producerError.textContent = "sai"
+            }
+            if (colors.length === 0) {
+                colorError.textContent = "sai"
+            }
+            if (!feature) {
+                featureError.textContent = "sai"
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

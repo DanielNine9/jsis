@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Example</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: orangered;
+            color: white
+        }
+
+        .flex {
+            display: flex;
+            gap: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+        button{
+            padding: 6px 40px;
+            color:white;
+            background: red;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th colspan="4" style="text-align: center; background: orangered; color: white">DANH MỤC SẢN PHẨM</th>
+        </tr>
+        <tr>
+            <th>Lựa chọn</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="product" value="1000"></td>
+            <td>iPhone 12</td>
+            <td><input type="number" name="quantity" value="2" min="1"></td>
+            <td>1000</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" name="product" value="800"></td>
+            <td>Samsung Galaxy</td>
+            <td><input type="number" name="quantity" value="1" min="1"></td>
+            <td>800</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding: 4px 40px; text-align: left;">
+                <p style="color:red; align-items: left;">
+                    Thành viên thân thiết
+                </p>
+                <div class="flex" style="padding: 0 100px;">
+                    <div>
+                        <input id="dong1" type="radio" name="member" value="0.9">
+                        <label for="dong1">Thành viên đồng</label>
+                    </div>
+                    <div>
+                        <input id="dong2" type="radio" name="member" value="0.8">
+                        <label for="dong2">Thành viên bạc</label>
+                    </div>
+                    <div>
+                        <input id="dong3" type="radio" name="member" value="0.7">
+                        <label for="dong3">Thành viên vàng</label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: left;">
+                <button onclick="submit()">Submit</button>
+            </td>
+        </tr>
+        <tr class="tr hidden">
+            <td colspan="4" id="totalPriceCell"  style="text-align: left;"></td>
+        </tr>
+    </table>
+
+    <script>
+        const checkboxInputs = document.querySelectorAll("input[type='checkbox']");
+        const quantityInputs = document.querySelectorAll("input[name='quantity']");
+        const memberInputs = document.querySelectorAll("input[name='member']");
+        const totalPriceCell = document.getElementById("totalPriceCell");
+
+        function submit() {
+            let totalPrice = 0;
+            let totalDiscount = 0
+            let disCount = 0
+
+            checkboxInputs.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    totalPrice += Number(checkbox.value) * Number(quantityInputs[index].value);
+                }
+            });
+
+            memberInputs.forEach(radio => {
+                if (radio.checked) {
+                    totalDiscount = totalPrice * Number(radio.value);
+                }
+            });
+            let result = `
+                <strong style="color:red;">Thành tiền:</strong> ${totalPrice} <br>
+                <strong style="color:red;">Giảm giá:</strong> ${totalPrice - totalDiscount} <br>
+                <strong style="color:red;">Số tiền phải trả:</strong> ${totalDiscount}
+            `;
+
+            totalPriceCell.innerHTML = result
+            totalPriceCell.parentElement.classList.remove("hidden");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Custom Video Controls</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 15px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            opacity: .8;
+        }
+
+
+        main {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            background: black;
+            border: 4px aqua solid;
+        }
+
+        h2 {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            min-width: 1000px;
+            margin: 0 auto;
+        }
+
+        video {
+            width: 100%;
+            max-height: 400px;
+        }
+
+        .custom-controls {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .custom-button {
+            margin: 0 5px;
+            padding: 8px 14px;
+            border: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .volume-button {
+            margin: 0 5px;
+            padding: 8px 14px;
+            border: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .mute-button {
+            padding: 8px 14px;
+            margin-left: 10px;
+            background-color: #e74c3c;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Custom HTML5 Video Player</h1>
+        <nav>
+            <a href="/bai1/index.html">Bài 1</a>
+            <a href="/bai2/index.html">Bài 2</a>
+            <a href="/bai3/index.html">Bài 3</a>
+            <a href="/bai4/index.html">Bài 4</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Custom HTML5 Video Player</h2>
+        <p>Video nhiều phút em upload lên lms không được ạ, nên em up file 10s này ạ</p>
+        <div class="container">
+            <div class="video-container">
+                <video id="videoPlayer">
+                    <source src="./video/Đồng hồ đếm ngược dành cho ai làm video 10s (1).mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="custom-controls">
+                <div class="controls-row">
+                    <button class="custom-button" onclick="togglePlayback()">Play/Pause</button>
+                    <button class="custom-button" onclick="stopVideo()">Stop</button>
+                    <button class="custom-button" onclick="replayVideo()">Replay</button>
+                    <button class="volume-button" onclick="adjustVolume(-0.1)">Volume (-)</button>
+                    <button class="volume-button" onclick="adjustVolume(0.1)">Volume (+)</button>
+                    <button class="custom-button mute-button" onclick="toggleMute()">Mute/Unmute</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; huydqpc07859
+    </footer>
+
+
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        const muteButton = document.querySelector('.mute-button');
+
+        function togglePlayback() {
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+            } else {
+                videoPlayer.pause();
+            }
+        }
+
+        function toggleMute() {
+            if (videoPlayer.muted) {
+                videoPlayer.muted = false;
+            } else {
+                videoPlayer.muted = true;
+            }
+        }
+
+        function adjustVolume(change) {
+            let newVolume = videoPlayer.volume + change;
+            newVolume = Math.max(0, Math.min(1, newVolume));
+            videoPlayer.volume = newVolume;
+        }
+
+        function stopVideo() {
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0;
+        }
+
+        function replayVideo() {
+            videoPlayer.currentTime = 0;
+            videoPlayer.play();
+        }
+    </script>
+</body>
+
+</html>

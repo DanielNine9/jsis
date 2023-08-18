@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        
+
+        h1 {
+            font-size: 18px;
+        }
+
+        header {
+            background-color: black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 15px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            opacity: .8;
+        }
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .flex {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .box-img {
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 6px 6px 6px orange;
+        }
+
+        img {
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        button {
+            padding: 4px 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Slide Show</h1>
+        <nav>
+            <a href="/bai1/index.html">Bài 1</a>
+            <a href="/bai2a/index.html">Bài 2</a>
+        </nav>
+    </header>
+    <main>
+        <h1 style="margin: 10px 10px;">NGÀNH QUẢN TRỊ KHÁCH SẠN TẠI FPT POLYTECHNIC</h1>
+        <div class="box-img">
+            <img src="./img/1.jpg" alt="" class="img">
+        </div>
+        <br>
+        <hr>
+        <div class="flex">
+            <button onclick="first()">
+                First
+            </button>
+            <button onclick="pre()">
+                Previous
+            </button>
+            <button onclick="next()">
+                Next
+            </button>
+            <button onclick="last()">
+                Last
+            </button>
+            <button onclick="play()">
+                Play
+            </button>
+            <button onclick="stop()">
+                Stop
+            </button>
+        </div>
+    </main>
+    <footer>
+        &copy; huydqpc07859
+    </footer>
+
+    <script>
+        const img = document.querySelector('img')
+        let index = 0
+        const imgs = [
+            "./img/1.jpg",
+            "./img/2.jpg",
+            "./img/3.jpg",
+            "./img/4.jpg",
+            "./img/5.jpg"
+        ]
+        function first() {
+            index = 0
+            img.src = imgs[index]
+        }
+        function last() {
+            index = imgs.length - 1
+            img.src = imgs[index]
+        }
+        function next() {
+            if (index === imgs.length - 1) {
+                index = 0
+            }
+            else {
+                index++
+            }
+            img.src = imgs[index]
+        }
+        function pre() {
+            if (index === 0) {
+                index = imgs.length - 1
+            } else {
+                index--
+
+            }
+            img.src = imgs[index]
+        }
+        let setIndex
+        function play() {
+            setIndex = setInterval(() => {
+                next()
+            }, 2000)
+        }
+        function stop() {
+            clearInterval(setIndex)
+        }
+    </script>
+</body>
+
+</html>

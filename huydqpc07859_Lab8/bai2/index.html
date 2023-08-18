@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Geolocation Demo</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 15px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            opacity: .8;
+        }
+
+        main {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #locationInfo {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Geolocation</h1>
+        <nav>
+            <a href="/bai1/index.html">Bài 1</a>
+            <a href="/bai2/index.html">Bài 2</a>
+            <a href="/bai3/index.html">Bài 3</a>
+            <a href="/bai4/index.html">Bài 4</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h2>Geolocation</h2>
+            <p>Click the button below to get your current location:</p>
+            <button onclick="getLocation()">Get Location</button>
+            <div id="locationInfo"></div>
+        </div>
+    </main>
+    <footer>
+        &copy; huydqpc07859
+    </footer>
+
+
+    <script>
+        function getLocation() {
+            const locationInfo = document.getElementById('locationInfo');
+
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    position => showPosition(position, locationInfo),
+                    error => showError(error, locationInfo)
+                );
+            } else {
+                locationInfo.textContent = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position, locationInfo) {
+            locationInfo.innerHTML = `
+        <p>Your current location:</p>
+        <p>Latitude: ${position.coords.latitude}</p>
+        <p>Longitude: ${position.coords.longitude}</p>
+      `;
+        }
+
+        function showError(error, locationInfo) {
+            let errorMessage = "";
+
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMessage = "User denied the request for Geolocation.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMessage = "Location information is unavailable.";
+                    break;
+                case error.TIMEOUT:
+                    errorMessage = "The request to get user location timed out.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    errorMessage = "An unknown error occurred.";
+                    break;
+            }
+
+            locationInfo.innerHTML = `<p>Error: ${errorMessage}</p>`;
+        }
+    </script>
+</body>
+
+</html>

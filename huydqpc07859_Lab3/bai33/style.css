@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background: black;
+}
+
+
+.menu-list {
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.menu-item a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 8px 10px;
+}
+
+.menu-item:hover a {
+    opacity: .7;
+}
+
+.app {
+    padding-top: 20px;
+    width: 360px;
+    margin: auto;
+    background: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.grid {
+    display: grid;
+    gap: 6px;
+    grid-template-columns: repeat(4, 1fr);
+
+}
+
+.screen {
+    height: 100px;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 70px;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    border-radius: 50%;
+    color: white;
+    height: 74px;
+    cursor: pointer;
+}
+
+.gray {
+    background: gray;
+    color: black
+}
+
+.gray:hover {
+    background: rgb(210, 207, 207);
+}
+
+.primary {
+    background: #333;
+
+}
+
+.primary:hover {
+    background: gray;
+}
+
+.orange {
+    background: orange;
+}
+
+.orange.hover {
+    background: rgb(229, 224, 224);
+    color: orange
+}
+
+.span {
+    grid-column: 1 / span 2;
+    border-radius: 100px
+}

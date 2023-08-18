@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+nav{
+    background: black;
+}
+.menu-list{
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+}
+.menu-item a{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 8px 10px;
+}
+.menu-item:hover a{
+    opacity: .7;
+}
+
+h1{
+    text-align: center;
+    color: red;
+}
+
+.grid{
+    display: grid;
+    width: 900px;
+    margin: auto;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h3{
+    color: rgb(137, 50, 50);
+}
+
+
+.item{
+    border: 2px solid blueviolet;
+    border-radius: 4px;
+    text-align: center;
+    padding: 20px;
+    
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" min="1" max="31">
+    <button onclick="submit()">submit</button>
+    <div class="result"></div>
+
+    <script>
+        const input = document.querySelector("input[type='number']")
+        const res = document.querySelector('.result')
+        function submit() {
+            const num = input.value
+            if(num < 0 || num > 31){
+                res.textContent = "nhap sai"
+                return 
+            }
+            let result = 0
+            if (num <= 25) {
+                result = num * 400000
+            } else {
+                let rest = num - 25
+                result = 25 * 400000 + (rest * 500000)
+            }
+            result = `
+                Tiền lương: ${result} <br>
+                Thuế thu nhập cá nhân: ${result * 0.1} <br>
+                Thực lĩnh: ${result - (result * 0.1)}
+            `
+            res.innerHTML = result
+        }
+
+
+    </script>
+</body>
+
+</html>

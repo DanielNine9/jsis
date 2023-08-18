@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        nav{
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        nav a{
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 10px 20px;
+            background: #333;
+            border-radius: 4px;
+
+        }
+
+        nav a:hover{
+            opacity: .8;
+        }
+
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        main{
+            margin: 20px;
+        }
+        
+
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .form-container input {
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            opacity: .7;
+        }
+
+        .product-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .product-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-list li .delete-btn {
+            padding: 5px 10px;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .product-list li .delete-btn:hover {
+            background-color: #ff5050;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Product Catalog</h1>
+        <nav>
+            <a href="/bai1/index.html">Bài 1</a>
+            <a href="/bai2/index.html">Bài 2</a>
+            <a href="/bai3/index.html">Bài 3</a>
+            <a href="/bai4/index.html">Bài 4</a>
+        </nav>
+    </header>
+    <main>
+
+
+        <div class="form-container">
+            <input type="text" id="productName" placeholder="Product Name">
+            <input type="text" id="productModel" placeholder="Model">
+            <input type="number" min="0" id="productCost" placeholder="Cost">
+            <input type="number" min="0" id="productQuantity" placeholder="Quantity">
+            <button onclick="addProduct()">Add Product</button>
+        </div>
+    
+        <ul class="product-list" id="productList"></ul>
+    </main>
+
+    <footer>
+        &copy; huydqpc07859
+    </footer>
+
+    <script>
+        const productList = document.getElementById('productList');
+
+        function addProduct() {
+            const productName = document.getElementById('productName').value.trim();
+            const productModel = document.getElementById('productModel').value.trim();
+            const productCost = parseFloat(document.getElementById('productCost').value);
+            const productQuantity = parseInt(document.getElementById('productQuantity').value);
+
+            if (!productName || !productModel || isNaN(productCost) || isNaN(productQuantity) || productCost <= 0 || productQuantity <= 0) {
+                alert("Please fill in all the product information correctly.");
+                return;
+            }
+
+            const newItem = {
+                name: productName,
+                model: productModel,
+                cost: productCost,
+                quantity: productQuantity,
+            };
+
+            inventoryArray.push(newItem);
+            displayProducts();
+        }
+
+        function deleteProduct(index) {
+            inventoryArray.splice(index, 1);
+            displayProducts();
+        }
+
+        function displayProducts() {
+            productList.innerHTML = "";
+
+            for (let i = 0; i < inventoryArray.length; i++) {
+                const item = inventoryArray[i];
+                const listItem = document.createElement("li");
+                listItem.textContent = `${item.name} - ${item.model} - Cost: $${item.cost} - Quantity: ${item.quantity}`;
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "Delete";
+                deleteBtn.className = "delete-btn";
+                deleteBtn.onclick = function () {
+                    deleteProduct(i);
+                };
+
+                listItem.appendChild(deleteBtn);
+                productList.appendChild(listItem);
+            }
+        }
+
+        const inventoryArray = [];
+
+        const item1 = { name: "Product 1", model: "Model A", cost: 100, quantity: 10 };
+        const item2 = { name: "Product 2", model: "Model B", cost: 200, quantity: 5 };
+        const item3 = { name: "Product 3", model: "Model C", cost: 150, quantity: 20 };
+        inventoryArray.push(item1, item2, item3);
+
+        displayProducts();
+    </script>
+</body>
+
+</html>

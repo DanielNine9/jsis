@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>.
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="font/themify-icons-font/themify-icons/themify-icons.css">
+
+</head>
+
+<body>
+    <div class="fixed top-0 left-0 right-0 bottom-0 lg:p-0 overflow-auto scroll-smooth">
+
+
+        <div class="bg-indigo-400">
+            <div class="container max-w-[1200px] mx-auto py-3 px-4 lg:px-0">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-white font-bold text-3xl py-2 flex hover:opacity-70 duration-300 cursor-pointer">
+                        <img class="rounded-[50%] w-[40px] h-[40px] mr-2 "
+                            src="https://media.istockphoto.com/id/1200584288/vi/vec-to/isometric-3d-icon-khu-%C4%91%C3%B4-th%E1%BB%8B-th%C3%A0nh-ph%E1%BB%91-v%E1%BB%9Bi-r%E1%BA%A5t-nhi%E1%BB%81u-ng%C3%B4i-nh%C3%A0.jpg?s=170667a&w=0&k=20&c=Cr9-cJplUEn0jyay_aSYilzEgPBfVofaPtcJ56mlYNk="
+                            alt="">
+                        <a href="index.html">Travel</a>
+                    </h2>
+                    <div class="hidden lg:flex items-center gap-2 auth">
+                        <div class="flex wrap-auth">
+                            <div class="loginbtn text-white hover:bg-white hover:text-black cursor-pointer px-4 py-1">Đăng nhập</div>
+                            <div class="registerbtn text-white hover:bg-white hover:text-black cursor-pointer px-4 py-1">Đăng ký</div>
+                        </div>
+    
+                        <div class="userinfo flex gap-2"></div>
+
+                        <!-- <img class="w-[36px] h-[36px] object-cover rounded-full shadow"
+                            src="https://kynguyenlamdep.com/wp-content/uploads/2022/06/anh-gai-xinh-cuc-dep.jpg" alt="">
+                        <div class="hover:opacity-70 cursor-pointer flex items-center gap-2">
+                            <span class="text-white font-thin flex items-center">Hà Thị
+                                Ngọc</span>
+                            <i class="text-white text-[12px] translate-y-[10%] ti-angle-down"></i>
+                        </div> -->
+                        <i class="cart ti-shopping-cart class text-2xl text-white ml-4 cursor-pointer relative">
+                            <div
+                                class="hidden number absolute border border-black bg-indigo-300 w-5 h-5 top-[-10px] right-[-10px] flex justify-center items-center text-white text-[14px] rounded-full">
+                            </div>
+                        </i>
+                    </div>
+
+                    <i class="lg:hidden control ti-menu text-3xl hover:opacity-80 cursor-pointer relative">
+                    </i>
+                </div>
+
+                <form action="" class="w-3/4 mx-auto flex-col flex gap-2">
+                    <div class=" bg-white  rounded-sm shadow px-2 py-1">
+                        <div class="flex">
+                            <input
+                                class="w-full outline-none border-none text-xl px-2 placeholder:text-gray-300  mx-auto"
+                                placeholder="Search" type="text">
+                            <button
+                                class="bg-indigo-400 text-white px-4 py-1 hover:opacity-70 duration-500">Search</button>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex text-white justify-between">
+                        <div class="flex gap-10 text-white">
+                            <p class="cursor-pointer duration-300 hover:opacity-70 ">Vé máy bay</p>
+                            <p class="cursor-pointer duration-300 hover:opacity-70 ">Du lịch</p>
+                            <p class="cursor-pointer duration-300 hover:opacity-70 ">Khách sạn</p>
+                            <p class="cursor-pointer duration-300 hover:opacity-70 ">Visa</p>
+                            <p class="cursor-pointer duration-300 hover:opacity-70 ">Combo</p>
+                        </div>
+                        <div>
+                            <p class="tracking-widest"><i class="ti-mobile"></i> 099 9999 9999</p>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="relative w-full">
+            <img src="https://booking.pystravel.vn/wp-content/uploads/2018/06/28071000_1606481882721429_8147843716531251685_o.jpg"
+                alt="" class="object-cover w-full">
+            <div class="bg-black/50 absolute top-0 left-0 w-full h-full lg:flex justify-center items-center hidden">
+                <div class=" max-w-lg mx-auto bg-white p-8 shadow-md rounded-md w-full">
+                    <h2 class="text-2xl font-bold mb-4">Đặt vé khách sạn</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Họ và tên</label>
+                            <input
+                                class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                id="name" type="text" placeholder="Nhập họ và tên của bạn">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+                            <input
+                                class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                id="email" type="email" placeholder="Nhập địa chỉ email của bạn">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="Hotel">Khách sạn</label>
+                            <select
+                                class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                id="Hotel">
+                                <option value="">Chọn khách sạn</option>
+                                <option value="Hotel1">Khách sạn 1</option>
+                                <option value="Hotel2">Khách sạn 2</option>
+                                <option value="Hotel3">Khách sạn 3</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="checkin">Ngày nhận
+                                phòng</label>
+                            <input
+                                class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                id="checkin" type="date">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="checkout">Ngày trả
+                                phòng</label>
+                            <input
+                                class="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                id="checkout" type="date">
+                        </div>
+                        <div class="text-center">
+                            <button
+                                class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                type="submit">Đặt vé</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- main -->
+
+
+        <div class="max-w-[1200px] container mx-auto px-4 lg:px-0">
+
+            <h1 class="location text-3xl my-4">Ưu đãi tốt nhất để có chuyến đi tiết kiệm chi phí!</h1>
+            <select name="location"
+                class="outline-none border border-indigo-400 shadow w-[200px] py-2 text-2xl appearance-none focus:ring-2 focus:ring-indigo-500 text-center"
+                id="location">
+                <option class="px-4 text-[20px] w-[300px]" value="">All</option>
+                <option class="px-4 text-[20px] w-[300px]" value="vietnam">Việt Nam</option>
+                <option class="px-4 text-[20px] w-[300px]" value="paris">Paris</option>
+                <option class="px-4 text-[20px] w-[300px]" value="china">China</option>
+            </select>
+            <div class="flex flex-col lg:flex-row gap-2 my-4">
+                <button value="1"
+                    class=" text-white bg-indigo-500 btn-main-header text-xl px-4 py-1 rounded-sm font-thin">Tàu</button>
+                <button value="2" class="btn-main-header text-xl px-4 py-1 rounded-sm font-thin">Đưa đón săn
+                    bay</button>
+                <button value="3" class="btn-main-header text-xl px-4 py-1 rounded-sm font-thin">Đưa đón tàu
+                    hỏa</button>
+                <button value="4" class="btn-main-header text-xl px-4 py-1 rounded-sm font-thin">Taxi</button>
+            </div>
+            <div class="grid lg:grid-cols-4 sm:gap-12">
+                <!-- <nav class="lg:col-span-2 col-span-12 h-screen lg:block p-3 rounded-lg shadow">
+                    <h2 class="font-bold border-b border-gray-200 p-3">Filter by</h2>
+                    <div></div>
+                </nav> -->
+                <div class="grid lg:grid-cols-4 sm:grid-cols-2 col-span-12 w-full main sm:gap-4">
+                    <div class="text-2xl w-screen h-screen col-span-12">
+                        Loading...
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- footer -->
+        <footer
+            class="mt-10 bg-[url('https://a-static.besthdwallpaper.com/high-angle-view-of-cityscape-against-cloudy-sky-new-york-city-wallpaper-1920x1080-55341_48.jpg')] h-screen overflow-y-auto relative bg-center bg-no-repeat ">
+            <div
+                class="flex w-full flex-col lg:flex-row lg:justify-between max-w-[1000px] mx-auto items-center absolute top-[10%] right-1/2 translate-x-[50%] gap-16">
+                <div>
+                    <p class="text-gray-200 tracking-wide">KEEP IN TOUCH</p>
+                    <h1 class="text-white font-bold text-4xl">Travel with US</h1>
+                </div>
+                <form action="" class="flex flex-col lg:flex-row gap-4">
+                    <input
+                        class="outline-none border-none text-2xl shadow-sm bg-white flex-2 rounded-full w-full px-4 py-1"
+                        type="text">
+                    <button
+                        class="tracking-widest flex-1 text-white bg-[#14b9d5] w-full rounded-full px-6 hover:opacity-80 py-1">SEND</button>
+                </form>
+            </div>
+
+
+            <div class="absolute max-w-[1200px] bottom-[3%] left-[12%]  bg-white w-3/4 p-4">
+                <div class="grid  gap-4 p-3 lg:grid-cols-12  max-h-[300px] overflow-x-scroll">
+                    <div class="flex flex-col lg:col-span-6">
+                        <h2 class="text-[#555] text-3xl  text-center">Travel .</h2>
+                        <p class="text-left text-gray-300">Lorem ipsum dolor sit Lorem ipsum dolor sit, amet consectetur
+                            adipisicing elit. Est asperiores in odio voluptate veniam perferendis quas aliquid
+                            consectetur?
+                            Fuga voluptatem eaque, eum vel accusantium odit molestias consequuntur commodi obcaecati
+                            inventore? amet consectetur adipisicing elit. Rerum odit soluta </p>
+                    </div>
+                    <div class="flex flex-col lg:col-span-2">
+                        <h2>OUR AGENCY</h2>
+                        <div class="text-gray-400 px-4 py-3">
+                            <p>Services</p>
+                            <p>Insurancee</p>
+                            <p>Agency</p>
+                            <p>Tourism</p>
+                            <p>Payment</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:col-span-2">
+                        <h2>Partners</h2>
+                        <div class="text-gray-400 px-4 py-3">
+                            <p>Booking</p>
+                            <p>RentalCar</p>
+                            <p>HostelWorld</p>
+                            <p>Trivago</p>
+                            <p>TripAdvisor</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:col-span-2">
+                        <h2>LAST MINUTE</h2>
+                        <div class="text-gray-400 px-4 py-3">
+                            <p>London</p>
+                            <p>California</p>
+                            <p>Indonesia</p>
+                            <p>Europe</p>
+                            <p>Oceania</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-3 px-4 mx-[-16px] mb-[-16px] text-white text-center font-thin bg-[#13b4cf] tracking-widest bg- text-[12px] flex flex-col lg:flex-row lg:justify-between">
+                    <h2> THE BEST WORDPRESS TRAVEL THEME</h2>
+                    <p>&copy; COPYRIGHT Đinh Quốc Huy PC07859</p>
+                </div>
+            </div>
+        </footer>
+
+        <div
+            class="hidden bg-black/70 fixed flex z-30 top-0 left-0 right-0 bottom-0 justify-center items-center overlayview">
+        </div>
+        <div
+            class="hidden bg-white w-full h-full lg:w-5/6 lg:h-5/6 overflow-y-auto overflow-x-hidden fixed  z-30 left-1/2 translate-x-[-50%] top-1/2 translate-y-[-50%] viewdetails">
+            <div class="ti-close absolute top-4 right-4 text-xl hover:opacity-70 cursor-pointer text-black"></div>
+            <h1 class="text-center text-4xl my-2">View Detail</h1>
+
+            <div class="img h-4/5">
+                <img src="./img/1.jpg" class="imgdetail bg-contain h-full w-full" alt="">
+            </div>
+            <div class="p-4">
+                <div class="grid grid-cols-4 gap-4">
+                    <img src="./img/1.jpg" class="flex-1 img-view w-full h-full bg-contain" alt="">
+                    <img src="./img/1.jpg" class="flex-1 img-view w-full h-full bg-contain" alt="">
+                    <img src="./img/1.jpg" class="flex-1 img-view w-full h-full bg-contain" alt="">
+                    <img src="./img/1.jpg" class="flex-1 img-view w-full h-full bg-contain" alt="">
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div class="flex justify-between">
+                        <div class="text-2xl">Rating: <span class="rating text-red-500"></span></div>
+                    </div>
+                    <h1 class="name text-4xl">Hotel</h1>
+                    <p class="desc text-gray-400 text-xl">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
+                        deleniti distinctio
+                        aperiam
+                        pariatur minima nostrum obcaecati maxime reiciendis nihil aliquid at quidem natus, tenetur
+                        deserunt expedita vero cumque repellendus cum.</p>
+                </div>
+
+                <div class=" text-2xl">Price: <span class="price text-red-500"></span> <span
+                        class="text-red-500">$</span></div>
+                <div class="text-right">
+                    <button
+                        class="py-2 px-4 text-white bg-indigo-500 cursor-pointer hover:opacity-50 duration-300 rounded-lg mt-2 booknow">Book
+                        now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden bg-black/60 fixed flex justify-center items-center top-0 left-0 right-0 bottom-0 z-30">
+
+    </div>
+    <div
+        class="hidden w-full h-full  cartdetails shadow-xl bg-white lg:w-5/6 lg:h-5/6 overflow-y-auto overflow-x-hidden fixed  z-30 left-1/2 translate-x-[-50%] top-1/2 translate-y-[-50%] p-4 viewdetails">
+        <div class="ti-close text-black absolute top-4 right-4 text-xl hover:opacity-70 cursor-pointer"></div>
+        <h1 class="font-semibold text-center text-3xl mb-3">Giỏ hàng của bạn</h1>
+        <div class="flex justify-between">
+            <div class="flex flex-end gap-4 option mb-4">
+                <button value="delete" class="px-3 py-1 rounded-[4px] bg-gray-300 hover:bg-red-500">Delete all</button>
+                <button value="pay" class="px-3 py-1 rounded-[4px] bg-indigo-500 hover:opacity-70 text-white">Pay
+                    all</button>
+            </div>
+            <div class="text-2xl">
+                Total: <span class="total text-red-500">Number</span>
+            </div>
+        </div>
+
+
+
+        <div class="flex flex-col gap-4 overflow-hidden cart-contain">
+            <div class="min-w-[300px]">
+                <img class="w-full h-full bg-contain"
+                    src="https://cdn3.ivivu.com/2016/11/Hotel-Royal-Hoi-An-Mgallery-ivivu-9.jpg" alt="">
+            </div>
+            <div class="flex flex-2 flex-col gap-2 p-2">
+                <div class="flex justify-between">
+                    <h1 class="text-2xl">Hotel</h1>
+                    <p class="text-xl">Rating: <span class="text-red-500">9.9</span></p>
+                </div>
+
+                <p class="text-xl text-gray-500 overflow-y-auto">Lorem ipsum dolor sit amet consectetur, adipisicing
+                    elit. Maxime porro magni nesciunt consequatur inventore. Fuga nam accusantium, veniam explicabo
+                    quod, libero eaque voluptas amet earum necessitatibus architecto aliquid! Aperiam, tenetur.</p>
+                <div class="flex gap-4 items-center text-xl">
+                    <p class="text-gray-400">Điều chỉnh số lượng:</p>
+                    <i class="cursor-pointer hover:text-gray-400 text-black border px-2 border-gray-400">-</i>
+                    <p>1</p>
+                    <i class="cursor-pointer hover:text-gray-400 text-black border px-2 border-gray-400">+</i>
+                </div>
+            </div>
+            <div
+                class="close text-2xl flex-1 flex items-center hover:bg-red-500 cursor-pointer hover:text-white bg-gray-200 px-3">
+                <i class="ti-close text-sm"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <div
+        class=" shadow-xl hidden payall w-full h-full  bg-white lg:w-2/4 lg:h-2/4 rounded-xl fixed  z-30 left-1/2 translate-x-[-50%] top-1/2 translate-y-[-50%] p-4 flex justify-center flex-col items-center gap-16">
+        <div class="text-2xl flex flex-col items-center gap-4">
+            Thank you
+            <i
+                class="ti-check border border-black rounded-full w-[40px] h-[40px] text-green-400 flex items-center justify-center"></i>
+        </div>
+        <div class="text-xl">Total: <span class="total text-red-500">999$</span></div>
+        <div class="flex gap-10">
+            <button value="ok"
+                class="ok bg-indigo-500 rounded-[10px] px-6 py-2 hover:bg-green-500 text-white">OK</button>
+        </div>
+    </div>
+
+
+
+
+    <i
+        class="cart ti-shopping-cart class text-2xl text-indigo-400 bg-white border border-gray-300 hover:bg-indigo-400 hover:text-white rounded-full p-2 ml-4 cursor-pointer fixed bottom-10 right-4"></i>
+
+    <div
+        class="sure hidden w-full h-full  bg-white lg:w-2/4 lg:h-2/4 rounded-xl fixed  z-30 left-1/2 translate-x-[-50%] top-1/2 translate-y-[-50%] p-4 flex justify-center flex-col items-center gap-16">
+        <div class="text-2xl flex flex-col items-center gap-4">
+            Chắc chắn?
+            <i
+                class="ti-check border border-black rounded-full w-[40px] h-[40px] text-red-400 flex items-center justify-center"></i>
+        </div>
+        <div class="flex gap-10">
+            <button value="" class="cancel bg-indigo-500 rounded-[10px] px-6 py-2 hover:bg-gray-300 text-white">Hủy
+                bỏ</button>
+            <button value="ok" class="ok bg-indigo-500 rounded-[10px] px-6 py-2 hover:bg-red-500 text-white">OK</button>
+        </div>
+    </div>
+
+    <!-- Auth -->
+
+    <div
+        class="overlayauth fixed top-0 left-0 right-0 p-6 lg:p-0 bottom-0 bg-black/70 flex justify-center items-center z-50">
+        <!-- login -->
+        <form id="login" action="" class="rounded-lg flex-col w-full lg:w-2/4 bg-indigo-100 p-5 gap-4">
+            <h2 class="text-2xl text-center">Login</h2>
+            <div class="flex flex-col">
+                <label for="username" class="text-xl">Username</label>
+                <input value="admin" id="username" type="text"
+                    class="text-xl rounded-sm shadow-lg w-full p-2 outline-none border">
+                <span class="text-red-500"></span>
+            </div>
+            <div class="flex flex-col">
+                <label for="password" class="text-xl">Password</label>
+                <input value="1234" id="password" type="password"
+                    class="text-xl rounded-sm shadow-lg w-full p-2 outline-none border">
+                <span class="text-red-500"></span>
+                <span class="text-right mt-2 hover:text-indigo-500 cursor-pointer">Forget your password?</span>
+            </div>
+
+
+            <button class="w-full hover:opacity-70 text-xl rounded-lg bg-indigo-500 text-white mt-4 p-2">Sign
+                in</button>
+            <div class="flex justify-between px-3 items-center mt-1">
+                <div>
+                    <div class="cancle text-black px-4 py-2 text-xl hover:bg-white cursor-pointer">Cancel</div>
+                </div>
+                <div class="flex items-center">
+
+                    <h2 class="text-xl">You dont have account? </h2>
+                    <button class="signup text-xl hover:bg-indigo-400 hover:text-white px-3 py-1">Sign Up</button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- register -->
+        <form id="register" action="" class="hidden rounded-lg flex-col w-full lg:w-2/4 bg-indigo-100 p-5 gap-4">
+            <h2 class="text-2xl text-center">Register</h2>
+            <div class="flex flex-col">
+                <label for="newusername" class="text-xl">Username</label>
+                <input id="newusername" type="text"
+                    class="text-xl rounded-[4px] shadow-lg w-full p-2 outline-none border">
+                <span class="text-red-500"></span>
+            </div>
+
+
+            <div class="flex flex-col">
+                <label for="newpassword" class="text-xl">Password</label>
+                <input id="newpassword" type="password"
+                    class="text-xl rounded-[4px] shadow-lg w-full p-2 outline-none border">
+                <span class="text-red-500"></span>
+            </div>
+            <div class="flex flex-col">
+                <label for="confirm" class="text-xl">Confirm Password</label>
+                <input id="confirm" type="password"
+                    class="text-xl rounded-[4px] shadow-lg w-full p-2 outline-none border">
+                <span class="text-red-500"></span>
+            </div>
+
+            <button class="w-full hover:opacity-70 text-xl rounded-lg bg-indigo-500 text-white mt-4 p-2">Sign
+                up</button>
+            <div class="flex justify-between px-3 mt-1">
+                <div class="cancle text-black px-4 py-2 text-xl hover:bg-white cursor-pointer">Cancel</div>
+                <button class="signin text-xl hover:bg-indigo-400 hover:text-white px-3 py-1">Sign In</button>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!--     
+    
+        <div class="send-now hidden  fixed left-0 right-0 p-4 lg:p-0 top-0 bottom-0 bg-black/70 z-50 justify-center items-center">
+            <div class="bg-white w-full h-full lg:w-2/3 lg:h-2/3 p-2 relative">
+                <i class="ti-close absolute top-4 right-4 cursor-pointer btn-send-now hover:opacity-70"></i>
+                <h1 class="text-center text-4xl font-bold text-red-500 mb-4">Success</h1>
+                <div class="grid lg:grid-cols-2 gap-4">
+                    <img class="w-full"
+                        src="https://ik.imagekit.io/tvlk/blog/2021/11/dia-diem-du-lich-trung-quoc-1.jpg?tr=dpr-2,w-675"
+                        alt="">
+                    <h2 class="text-2xl">China is a beautiful country</h2>
+                </div>
+                <div class="mt-4">
+                    <div class="flex bg-[#1bbc9b] gap-10 justify-center mx-auto text-white">
+                        <p class="text-center">DAYS
+                            <br>
+                            <span class="text-2xl font-mono">00</span>
+                        </p>
+                        <p class="text-center">HOURS
+                            <br><span class="text-2xl font-mono">00</span>
+                        </p>
+                        <p class="text-center">MINUTES
+                            <br><span class="text-2xl font-mono">00</span>
+                        </p>
+                        <p class="text-center">SECOND
+                            <br><span class="text-2xl font-mono">00</span>
+                        </p>
+                    </div>
+                </div>
+                <button></button>
+            </div>
+        </div> -->
+
+
+
+    <script type="module" src="./js/test.js"></script>
+</body>
+
+</html>

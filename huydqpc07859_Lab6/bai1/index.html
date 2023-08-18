@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 15px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            opacity: .8;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .accordion {
+            width: 100%;
+        }
+
+        .accordion-item {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .accordion-header {
+            background-color: #f1f1f1;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 10px;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Collapsible accordion component</h1>
+        <nav>
+            <a href="/bai1/index.html">Bài 1</a>
+            <a href="/bai2/index.html">Bài 2</a>
+            <a href="/bai3/index.html">Bài 3</a>
+            <a href="/bai4/index.html">Bài 4</a>
+        </nav>
+    </header>
+    <main>
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">Section 1</div>
+                <div class="accordion-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum aspernatur tempore
+                        repellendus nam consequatur repudiandae ducimus quisquam sit porro aliquam, quibusdam quis
+                        nostrum molestiae unde excepturi incidunt laboriosam omnis.</p>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">Section 2</div>
+                <div class="accordion-content">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum aspernatur tempore
+                        repellendus nam consequatur repudiandae ducimus quisquam sit porro aliquam, quibusdam quis
+                        nostrum molestiae unde excepturi incidunt laboriosam omnis.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer>
+        &copy; huydqpc07859
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(function (header) {
+                header.addEventListener('click', function () {
+                    this.parentElement.classList.toggle('active');
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

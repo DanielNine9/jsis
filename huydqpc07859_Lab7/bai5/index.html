@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 15px;
+      background-color: #333;
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      opacity: .8;
+    }
+
+
+    main {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+      max-width: 600px;
+      width: 600px;
+      margin: 0 auto;
+    }
+
+    .error-message,
+    .success-message {
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .fixed-info {
+      position: fixed;
+      top: 300px;
+      right: 20px;
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      display: none;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    select {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #ced4da;
+      border-radius: 3px;
+    }
+
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    .info-group {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .info-group strong {
+      font-weight: normal;
+    }
+
+    .radio-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .radio-group label {
+      margin-right: 10px;
+    }
+
+    #phi_vc {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .flex {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #000;
+      color: #fff;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Form đặt hàng</h1>
+    <nav>
+      <a href="/bai1/index.html">Bài 1</a>
+      <a href="/bai2/index.html">Bài 2</a>
+      <a href="/bai3/index.html">Bài 3</a>
+      <a href="/bai4/index.html">Bài 4</a>
+      <a href="/bai5/index.html">Bài 5</a>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+      <h2>Form Validation</h2>
+      <form onsubmit="return kiem_tra()">
+        <label for="san_pham">Sản phẩm:</label>
+        <input type="text" id="san_pham" name="san_pham" required /><br />
+
+        <label for="don_gia">Đơn giá:</label>
+        <input type="text" id="don_gia" name="don_gia" required /><br />
+
+        <label for="loai">Loại sản phẩm:</label>
+        <select id="loai" name="loai" required>
+          <option value="">Chọn loại sản phẩm</option>
+          <option value="1">Loại 1</option>
+          <option value="2">Loại 2</option>
+          <option value="3">Loại 3</option>
+        </select><br />
+
+        <label>Địa chỉ giao hàng:</label><br />
+
+        <div class="flex">
+          <input type="radio" name="dia_chi" value="dia_chi_1" onclick="hien_thi(false)" />
+          <label for="dia_chi_1">Nội thành</label>
+          <input type="radio" name="dia_chi" value="dia_chi_2" onclick="hien_thi(true)" />
+          <label for="dia_chi_2">Ngoại thành</label><br />
+
+
+        </div>
+        <div id="phi_vc">
+          <label for="phi">Phí vận chuyển:</label>
+
+          <input type="text" id="phi" name="phi" />
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
+      <div class="error-message" id="error_message"></div>
+      <div class="success-message" id="success_message"></div>
+    </div>
+
+    <div class="fixed-info" id="fixed_info">
+      <h3>Thông tin sản phẩm:</h3>
+      <p><strong>Sản phẩm:</strong> <span id="info_san_pham"></span></p>
+      <p><strong>Đơn giá:</strong> <span id="info_don_gia"></span></p>
+      <p><strong>Loại sản phẩm:</strong> <span id="info_loai"></span></p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; huydqpc07859
+  </footer>
+
+<script>
+Array.from(document.getElementsByTagName("form")).forEach((element) => {
+  console.log(element);
+  element.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+});
+function hien_thi(visible) {
+  var phi_vc = document.getElementById("phi_vc");
+  phi_vc.style.display = visible ? "block" : "none";
+}
+
+function kiem_tra(e) {
+  var sp = document.getElementById("san_pham");
+  var gia = document.getElementById("don_gia");
+  var loai = document.getElementById("loai");
+  var radios = document.getElementsByName("dia_chi");
+  var phi = document.getElementById("phi");
+  var error_message = document.getElementById("error_message");
+var success_message = document.getElementById("success_message");
+  var fixed_info = document.getElementById("fixed_info");
+  var info_san_pham = document.getElementById("info_san_pham");
+  var info_don_gia = document.getElementById("info_don_gia");
+  var info_loai = document.getElementById("info_loai");
+
+  error_message.innerHTML = "";
+  success_message.innerHTML = "";
+
+  if (
+    sp.value.length === 0 ||
+    gia.value.length === 0 ||
+    loai.value.length === 0 ||
+    (!radios[0].checked && !radios[1].checked)
+  ) {
+    error_message.innerHTML = "Vui lòng điền đầy đủ thông tin.";
+    return false;
+  }
+
+  if (isNaN(gia.value) || parseFloat(gia.value) <= 0) {
+    error_message.innerHTML = "Vui lòng nhập giá sản phẩm hợp lệ.";
+    return false;
+  }
+
+  if (!phi.disabled && (isNaN(phi.value) || parseFloat(phi.value) < 0)) {
+    error_message.innerHTML = "Vui lòng nhập phí vận chuyển hợp lệ.";
+    return false;
+  }
+  let money = Number(document.getElementById("phi").value);
+  console.log(money)
+  if (money !== isNaN && money !== undefined && money !== 0) {
+    info_don_gia.innerHTML = Number(gia.value) + Number(money);
+  } else {
+    info_don_gia.innerHTML = gia.value;
+  }
+  success_message.innerHTML = "Thêm sản phẩm thành công";
+  info_san_pham.innerHTML = sp.value;
+  info_loai.innerHTML = loai.options[loai.selectedIndex].text;
+
+  fixed_info.style.display = "block";
+  phi.value = ''
+
+  return true;
+}
+</script>
+</body>
+</html>

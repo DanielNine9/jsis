@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+          
+        }
+
+        header {
+            background-color: black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        header h1 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 15px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            opacity: .8;
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .wrap {
+            min-height: 200px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .result {
+            color: red;
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .student-info h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: black;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Student Information</h1>
+        <nav>
+            <a href="/bai1/index.html">Bài 1</a>
+            <a href="/bai2/index.html">Bài 2</a>
+            <a href="/bai3/index.html">Bài 3</a>
+            <a href="/bai4/index.html">Bài 4</a>
+        </nav>
+    </header>
+    <main>
+
+
+        <div class="container">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" onblur="formatNameInput()">
+            </div>
+            <div class="form-group">
+                <label for="grade">Grade (0-10):</label>
+                <input type="number" min="0" max="10" id="grade" placeholder="Enter your grade" onblur="validateGrade()">
+            </div>
+            <button class="submit-btn" onclick="showStudentInfo()">Show Information</button>
+        </div>
+    
+        <div class="wrap">
+            <h3 class="result">Result</h3>
+            <div class="student-info" id="studentInfoContainer"></div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; huydqpc07859
+    </footer>
+
+    <script>
+        var student = new Object();
+
+ 
+
+        function formatNameInput() {
+        var nameInput = document.getElementById('fullName');
+        var name = nameInput.value.trim();
+        var regex = /^[A-Za-z\s\u00C0-\u024F\u1E00-\u1EFF]+$/; // Biểu thức chính quy cho tên tiếng Việt
+
+        if (!regex.test(name)) {
+            alert("Please enter a valid Vietnamese name.");
+            nameInput.value = '';
+            return;
+        }
+
+        var words = name.split(/\s+/);
+        for (var i = 0; i < words.length; i++) {
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].substring(1);
+        }
+        nameInput.value = words.join(' ');
+    }
+
+        function validateGrade() {
+            var gradeInput = document.getElementById('grade');
+            var grade = parseFloat(gradeInput.value);
+            if (isNaN(grade) || grade < 0 || grade > 10) {
+                alert("Please enter a valid grade between 0 and 10.");
+                gradeInput.value = '';
+            }
+        }
+
+        function showStudentInfo() {
+            student.fullName = document.getElementById('fullName').value;
+            student.grade = parseFloat(document.getElementById('grade').value);
+
+            if (student.grade >= 5) {
+                student.hocLuc = "Đậu";
+            } else {
+                student.hocLuc = "Rớt";
+            }
+
+            var studentInfoContainer = document.getElementById('studentInfoContainer');
+            studentInfoContainer.innerHTML = "<h3>Full Name: " + student.fullName + "</h3>";
+            studentInfoContainer.innerHTML += "<h3>Grade: " + student.grade + "</h3>";
+            studentInfoContainer.innerHTML += "<h3>Evaluation: " + student.hocLuc + "</h3>";
+        }
+    </script>
+</body>
+
+</html>

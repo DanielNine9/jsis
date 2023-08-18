@@ -1,0 +1,519 @@
+CREATE DATABASE HELLO
+GO
+
+USE HELLO
+GO
+
+CREATE TABLE SACH (
+    MaSach VARCHAR(10) NOT NULL,
+    TieuDe NVARCHAR(50) NOT NULL,
+	TenSach NVARCHAR(50) NOT NULL,
+    SoTrang INT NOT NULL,
+    SLBS INT NOT NULL,
+    GiaTien MONEY NOT NULL,
+    NgayNhapKho DATE NOT NULL,
+    MaViTri VARCHAR(10),
+    MaLoai VARCHAR(10),
+    MaNhaXuatBan VARCHAR(10)
+);
+GO
+
+CREATE TABLE TACGIA (
+    MaTacGia VARCHAR(10) NOT NULL,
+    TenTacGia NVARCHAR(50) NOT NULL 
+);
+GO
+
+CREATE TABLE VIET (
+    MaTacGia VARCHAR(10) NOT NULL,
+    MaSach VARCHAR(10) NOT NULL,
+);
+GO
+
+CREATE TABLE VITRIDATSACH (
+    MaViTri VARCHAR(10) NOT NULL,
+    TenViTri NVARCHAR(30) NOT NULL
+);
+GO
+
+CREATE TABLE NHAXUATBAN (
+    MaNhaXuatBan VARCHAR(10) NOT NULL,
+    TenNhaXuatBan NVARCHAR(30) NOT NULL
+);
+GO
+
+CREATE TABLE PHIEUMUONCHITIET (
+    MaPhieuMuonChiTiet VARCHAR(10) NOT NULL,
+    SoThuTu INT NOT NULL,
+    GhiChu NVARCHAR(50),
+    MaPhieuMuon INT,
+    MaNhaXuatBan VARCHAR(10),
+    MaSach VARCHAR(10),
+);
+GO
+
+CREATE TABLE THONGTINLIENHE (																					 
+    MaThongTin VARCHAR(10) NOT NULL,																						 
+    Email VARCHAR(50) NOT NULL UNIQUE,
+    SoDienThoai INT NOT NULL UNIQUE
+);
+GO
+
+CREATE TABLE CHUYENNGANH (
+    MaChuyenNganh VARCHAR(10) NOT NULL,
+    TenChuyenNganh NVARCHAR(50) NOT NULL	
+);
+GO
+
+CREATE TABLE THESINHVIEN (
+    MaSinhVien VARCHAR(10) NOT NULL,
+    TenSinhVien NVARCHAR(20) NOT NULL,
+    NgayHetHan DATE NOT NULL,
+    MaThongTin VARCHAR(10),
+    MaChuyenNganh VARCHAR(10),
+);
+GO
+
+CREATE TABLE LOAISACH(
+	MaLoai VARCHAR(10) NOT NULL,
+	TenLoai NVARCHAR(30) NOT NULL UNIQUE,
+)
+GO
+
+CREATE TABLE PHIEUMUON (
+    MaPhieuMuon INT IDENTITY(1, 1) NOT NULL ,
+    NgayMuon DATE NOT NULL,
+    NgayTra DATE NOT NULL,
+    TrangThai NVARCHAR(50) NOT NULL,
+    MaSinhVien VARCHAR(10),
+);
+GO
+
+-- CREATE PRIMARY KEY
+ALTER TABLE SACH ADD CONSTRAINT PK_SACH PRIMARY KEY(MaSach)
+
+ALTER TABLE TACGIA ADD CONSTRAINT PK_TACGIA PRIMARY KEY(MaTacGia)
+
+ALTER TABLE VIET ADD CONSTRAINT PK_VIET PRIMARY KEY(MaTacGia, MaSach)
+
+ALTER TABLE VITRIDATSACH ADD CONSTRAINT PK_VITRIDATSACH PRIMARY KEY(MaViTri)
+
+ALTER TABLE THONGTINLIENHE ADD CONSTRAINT PK_TTLH PRIMARY KEY(MaThongTin)
+
+ALTER TABLE PHIEUMUONCHITIET ADD CONSTRAINT PK_PHIEUMUONCHITIET PRIMARY KEY(MaPhieuMuonChiTiet)
+
+ALTER TABLE CHUYENNGANH ADD CONSTRAINT PK_CHUYENNGANH PRIMARY KEY(MaChuyenNganh)
+
+ALTER TABLE PHIEUMUON ADD CONSTRAINT PK_PHIEUMUON PRIMARY KEY(MaPhieuMuon)
+
+ALTER TABLE THESINHVIEN ADD CONSTRAINT PK_THESINHVIEN PRIMARY KEY(MaSinhVien)
+
+ALTER TABLE NHAXUATBAN ADD CONSTRAINT PK_NHAXUATBAN PRIMARY KEY(MaNhaXuatBan)
+
+ALTER TABLE LOAISACH ADD CONSTRAINT PK_LOAISACH PRIMARY KEY(MaLoai)
+-- CREATE FOREIGN KEY
+
+
+ALTER TABLE PHIEUMUONCHITIET ADD CONSTRAINT FK_PMCT_PM FOREIGN KEY(MaPhieuMuon) REFERENCES PHIEUMUON(MaPhieuMuon)
+ALTER TABLE PHIEUMUONCHITIET ADD CONSTRAINT FK_PMCT_NXB FOREIGN KEY(MaNhaXuatBan) REFERENCES NHAXUATBAN(MaNhaXuatBan)						
+ALTER TABLE PHIEUMUONCHITIET ADD CONSTRAINT FK_PMCT_Sach FOREIGN KEY(MaSach) REFERENCES SACH(MaSach)
+
+ALTER TABLE SACH ADD CONSTRAINT FK_SACH_VITRI FOREIGN KEY(MaViTri) REFERENCES VITRIDATSACH(MaViTri)
+ALTER TABLE SACH ADD CONSTRAINT FK_SACH_LOAI FOREIGN KEY(MaLoai) REFERENCES LOAISACH(MaLoai)
+ALTER TABLE SACH ADD CONSTRAINT FK_SACH_NHAXUATBAN FOREIGN KEY(MaNhaXuatBan) REFERENCES NHAXUATBAN(MaNhaXuatBan)
+
+ALTER TABLE THESINHVIEN ADD CONSTRAINT FK_TSV_TT FOREIGN KEY(MaThongTin) REFERENCES THONGTINLIENHE(MaThongTin)
+ALTER TABLE THESINHVIEN ADD CONSTRAINT FK_TSV_CN FOREIGN KEY(MaChuyenNganh) REFERENCES CHUYENNGANH(MaChuyenNganh)
+
+ALTER TABLE VIET ADD CONSTRAINT FK_VIET_TACGIA FOREIGN KEY(MaTacGia) REFERENCES TACGIA(MaTacGia)
+ALTER TABLE VIET ADD CONSTRAINT FK_VIET_SACH FOREIGN KEY(MaSach) REFERENCES SACH(MaSach)
+
+ALTER TABLE PHIEUMUON ADD CONSTRAINT FK_PM_SV FOREIGN KEY(MaSinhVien) REFERENCES THESINHVIEN(MaSinhVien)
+
+-- CREATE CONSTRAINT
+ALTER TABLE SACH ADD CONSTRAINT SACH_CONSTRAINT_SOTRANG CHECK(SoTrang > 5)
+ALTER TABLE SACH ADD CONSTRAINT SACH_CONSTRAINT_SLBS CHECK(SLBS > 1)
+ALTER TABLE SACH ADD CONSTRAINT SACH_CONSTRAINT_GIATIEN CHECK(GiaTien > 0)
+ALTER TABLE PHIEUMUON ADD CONSTRAINT CK_PHIEUMUON_NGAYTRA CHECK (NgayTra >= NgayMuon);
+ALTER TABLE PHIEUMUONCHITIET ADD CONSTRAINT CK_PHIEUMUONCHITIET_MAX_QUYEN CHECK (
+    (MaSach IS NOT NULL AND SoThuTu BETWEEN 1 AND 3)
+    OR (MaSach IS NULL AND SoThuTu = 0)
+);
+
+-- YC2
+-- CHUYENNGANH
+INSERT INTO CHUYENNGANH (MaChuyenNganh, TenChuyenNganh)
+VALUES 
+    ('CN006', N'Kỹ thuật hóa học'),
+    ('CN007', N'Điện tử viễn thông'),
+    ('CN008', N'Y học cổ truyền'),
+    ('CN009', N'Tâm lý học'),
+    ('CN010', N'Lịch sử nghệ thuật'),
+    ('CN021', N'Tiếng Anh'),
+    ('CN022', N'Hóa học ứng dụng'),
+    ('CN023', N'Kỹ thuật phần mềm'),
+    ('CN024', N'Sinh học đại cương'),
+    ('CN025', N'Tiếng Nhật'),
+    ('CN041', N'Quản trị kinh doanh'),
+    ('CN042', N'Kỹ thuật điện'),
+    ('CN043', N'Tâm lý học học tập'),
+    ('CN044', N'Lịch sử triết học'),
+    ('CN045', N'Điện tử viễn thông');
+
+
+-- THONGTINLIENHE
+INSERT INTO THONGTINLIENHE (MaThongTin, Email, SoDienThoai)
+VALUES 
+    ('TT006', 'tranvanx@example.com', '0987123456'),
+    ('TT007', 'phandinh@example.com', '0123123456'),
+    ('TT008', 'nguyenminh@example.com', '0369548217'),
+    ('TT009', 'lethien@example.com', '0777788888'),
+    ('TT010', 'dinhngoc@example.com', '0909234567'),
+	('TT021', 'tranvany@example.com', '0987000001'),
+    ('TT022', 'phandinhz@example.com', '0123000002'),
+    ('TT023', 'nguyenminhz@example.com', '0369000003'),
+    ('TT024', 'lethienk@example.com', '0777000004'),
+    ('TT025', 'dinhngocl@example.com', '0909000005'),
+    ('TT041', 'nguyenv@example.com', '0123456789'),
+    ('TT042', 'leth@example.com', '0987654321'),
+    ('TT043', 'phaml@example.com', '0932123456'),
+    ('TT044', 'tranth@example.com', '0869876543'),
+    ('TT045', 'voq@example.com', '0909123456');
+GO
+
+-- VITRIDATSACH
+INSERT INTO VITRIDATSACH (MaViTri, TenViTri)
+VALUES 
+    ('VT006', N'Kệ F6'),
+    ('VT007', N'Kệ G7'),
+    ('VT008', N'Kệ H8'),
+    ('VT009', N'Kệ I9'),
+    ('VT010', N'Kệ J10'),
+    ('VT021', N'Kệ K11'),
+    ('VT022', N'Kệ L12'),
+    ('VT023', N'Kệ M13'),
+    ('VT024', N'Kệ N14'),
+    ('VT025', N'Kệ O15'),
+    ('VT041', N'Kệ P16'),
+    ('VT042', N'Kệ Q17'),
+    ('VT043', N'Kệ R18'),
+    ('VT044', N'Kệ S19'),
+    ('VT045', N'Kệ T20');
+GO
+
+-- NHAXUATBAN
+INSERT INTO NHAXUATBAN (MaNhaXuatBan, TenNhaXuatBan)
+VALUES 
+    ('NXB006', N'NXB Kim Đồng'),
+    ('NXB007', N'NXB Văn Lang'),
+    ('NXB008', N'NXB Đại Học Quốc Gia'),
+    ('NXB009', N'NXB Lao Động'),
+    ('NXB010', N'NXB Tri Thức'),
+	('NXB021', N'NXB Trẻ'),
+    ('NXB022', N'NXB Giáo Dục'),
+    ('NXB023', N'NXB Thế Giới'),
+    ('NXB024', N'NXB Hội Nhà Văn'),
+    ('NXB025', N'NXB Kim Đồng'),
+    ('NXB041', N'NXB Hà Nội'),
+    ('NXB042', N'NXB Văn Học'),
+    ('NXB043', N'NXB Chính Trị Quốc Gia'),
+    ('NXB044', N'NXB Văn Nghệ'),
+    ('NXB045', N'NXB Thanh Niên');
+GO
+
+-- LOAISACH
+INSERT INTO LOAISACH (MaLoai, TenLoai)
+VALUES 
+    ('L006', N'Vật lý'),
+    ('L007', N'Tâm lý'),
+    ('IT', N'Kỹ năng lập trình'),
+    ('L009', N'Sách tôn giáo'),
+    ('L010', N'Tiểu thuyết nước ngoài'),
+	('L021', N'Thể dục'),
+    ('L022', N'Thể thao'),
+    ('L023', N'Văn học Việt Nam'),
+    ('L024', N'Tiểu thuyết cổ điển'),
+    ('L025', N'Văn hóa lịch sử Việt Nam'),
+    ('L041', N'Văn học nước ngoài'),
+    ('L042', N'Thiếu nhi'),
+    ('L043', N'Khoa học viễn tưởng'),
+    ('L044', N'Chính trị học'),
+    ('L045', N'Văn hóa thế giới');
+GO
+
+-- SACH
+INSERT INTO SACH (MaSach, TieuDe, TenSach, SoTrang, SLBS, GiaTien, NgayNhapKho, MaViTri, MaLoai, MaNhaXuatBan)
+VALUES 
+    ('MS006', N'Những nguyên lý cơ bản của hóa học', N'Nguyên lý hóa học', 300, 8, 220000, '2012-08-05', 'VT006', 'L006', 'NXB006'),
+    ('MS007', N'Tâm lý học đám đông', N'Tâm lý học đám đông', 180, 5, 95000, '2023-08-06', 'VT007', 'L007', 'NXB007'),
+    ('MS008', N'Lập trình cho người mới bắt đầu', N'Kỹ năng SQL', 250, 7, 175000, '2023-08-07', 'VT008', 'IT', 'NXB008'),
+    ('MS009', N'Đạo Phật ngày nay', N'Đạo Phật ngày nay', 400, 10, 190000, '2023-08-08', 'VT009', 'L009', 'NXB009'),
+    ('MS010', N'Sapiens: Lược sử loài người', N'Sapiens: Lược sử loài người', 450, 12, 280000, '2023-08-09', 'VT010', 'L010', 'NXB010'),
+	('MS021', N'Tiếng Anh cơ bản', N'Tiếng Anh cơ bản', 150, 3, 120000, '2023-08-09', 'VT021', 'L021', 'NXB021'),
+    ('MS022', N'Kỹ thuật hóa học ứng dụng', N'Kỹ thuật hóa học ứng dụng', 320, 8, 230000, '2023-08-10', 'VT022', 'L022', 'NXB022'),
+    ('MS023', N'Học kỹ năng SQL', N'Học kỹ năng SQL', 180, 6, 150000, '2023-08-11', 'VT023', 'L023', 'NXB023'),
+    ('MS024', N'Đại cương về sinh học', N'Đại cương về sinh học', 220, 5, 180000, '2023-08-12', 'VT024', 'L024', 'NXB024'),
+    ('MS025', N'Tiếng Nhật cơ bản', N'Tiếng Nhật cơ bản', 160, 4, 110000, '2023-08-13', 'VT025', 'L025', 'NXB025'),
+    ('MS041', N'Những tiểu thuyết nổi tiếng', N'Những tiểu thuyết nổi tiếng', 400, 12, 300000, '2023-08-27', 'VT041', 'L041', 'NXB041'),
+    ('MS042', N'Sách cho thiếu nhi', N'Sách cho thiếu nhi', 240, 7, 160000, '2023-08-28', 'VT042', 'L042', 'NXB042'),
+    ('MS043', N'Khoa học viễn tưởng đỉnh cao', N'Khoa học viễn tưởng đỉnh cao', 480, 10, 340000, '2023-08-29', 'VT043', 'L043', 'NXB043'),
+    ('MS044', N'Chính trị học hiện đại', N'Chính trị học hiện đại', 300, 9, 250000, '2023-08-30', 'VT044', 'L044', 'NXB044'),
+    ('MS045', N'Văn hóa thế giới trong lịch sử', N'Văn hóa thế giới trong lịch sử', 360, 11, 270000, '2023-08-31', 'VT045', 'L045', 'NXB045');
+
+-- TACGIA
+INSERT INTO TACGIA (MaTacGia, TenTacGia)
+VALUES 
+    ('TG006', N'Trần Văn X'),
+    ('TG007', N'Phan Đình Y'),
+    ('TG008', N'Nguyễn Minh Z'),
+    ('TG009', N'Lê Thiên K'),
+    ('TG010', N'Đinh Ngọc L'),
+	('TG021', N'Trần Văn X1'),
+    ('TG022', N'Phan Đình Y1'),
+    ('TG023', N'Nguyễn Minh Z1'),
+    ('TG024', N'Lê Thiên K1'),
+    ('TG025', N'Đinh Ngọc L1'),
+    ('TG041', N'Trần Văn X2'),
+    ('TG042', N'Phan Đình Y2'),
+    ('TG043', N'Nguyễn Minh Z2'),
+    ('TG044', N'Lê Thiên K2'),
+    ('TG045', N'Đinh Ngọc L2');
+GO
+
+-- VIET
+INSERT INTO VIET (MaTacGia, MaSach)
+VALUES 
+    ('TG006', 'MS006'),
+    ('TG007', 'MS007'),
+    ('TG008', 'MS008'),
+    ('TG009', 'MS009'),
+    ('TG010', 'MS010'),
+	('TG021', 'MS021'),
+    ('TG022', 'MS022'),
+    ('TG023', 'MS023'),
+    ('TG024', 'MS024'),
+    ('TG025', 'MS025'),
+    ('TG041', 'MS041'),
+    ('TG042', 'MS042'),
+    ('TG043', 'MS043'),
+    ('TG044', 'MS044'),
+    ('TG045', 'MS045');
+GO
+
+-- THESINHVIEN
+INSERT INTO THESINHVIEN (MaSinhVien, TenSinhVien, NgayHetHan, MaThongTin, MaChuyenNganh)
+VALUES 
+    ('SV006', N'Phạm Văn M', '2023-12-31', 'TT006', 'CN006'),
+    ('SV007', N'Ngô Thị N', '2023-11-30', 'TT007', 'CN007'),
+    ('PD12301', N'Trịnh Văn O', '2024-01-15', 'TT008', 'CN008'),
+    ('SV009', N'Lý Thị P', '2023-12-31', 'TT009', 'CN009'),
+    ('SV010', N'Võ Văn Q', '2023-10-31', 'TT010', 'CN010'),
+	('SV021', N'Phạm Văn M1', '2024-05-31', 'TT021', 'CN021'),
+    ('SV022', N'Ngô Thị N1', '2024-04-30', 'TT022', 'CN022'),
+    ('SV023', N'Trịnh Văn O1', '2024-06-15', 'TT023', 'CN023'),
+    ('SV024', N'Lý Thị P1', '2024-05-31', 'TT024', 'CN024'),
+    ('SV025', N'Võ Văn Q1', '2024-03-31', 'TT025', 'CN025'),
+    ('SV041', N'Trịnh Văn O2', '2024-06-15', 'TT021', 'CN041'),
+    ('SV042', N'Lý Thị P2', '2024-05-31', 'TT022', 'CN042'),
+    ('SV043', N'Võ Văn Q2', '2024-03-31', 'TT023', 'CN043'),
+    ('SV044', N'Trịnh Văn O3', '2024-06-15', 'TT024', 'CN044'),
+    ('SV045', N'Lý Thị P3', '2024-05-31', 'TT025', 'CN045');
+GO
+
+-- PHIEUMUON
+INSERT INTO PHIEUMUON (NgayMuon, NgayTra, TrangThai, MaSinhVien)
+VALUES 
+    ('2017-01-05', '2017-08-12', N'Đã trả', 'SV006'),
+    ('2023-08-06', '2023-08-13', N'Đã trả', 'SV007'),
+    ('2009-08-07', '2009-08-14', N'Đã trả', 'PD12301'),
+    ('2023-08-08', '2023-08-15', N'Đã trả', 'SV009'),
+    ('2023-08-09', '2023-08-13', N'Chưa trả sách', 'SV010'),
+	('2023-08-09', '2023-08-16', N'Đã trả', 'SV021'),
+    ('2023-08-10', '2023-08-17', N'Đã trả', 'SV022'),
+    ('2023-08-11', '2023-08-18', N'Đã trả', 'SV023'),
+    ('2023-08-12', '2023-08-19', N'Đã trả', 'SV024'),
+    ('2023-08-13', '2023-08-20', N'Chưa trả sách', 'SV025'),
+    ('2023-08-27', '2023-09-03', N'Đã trả', 'SV041'),
+    ('2023-08-28', '2023-09-04', N'Đã trả', 'SV042'),
+    ('2023-08-29', '2023-09-05', N'Đã trả', 'SV043'),
+    ('2023-08-30', '2023-09-06', N'Đã trả', 'SV044'),
+    ('2023-08-31', '2023-09-07', N'Chưa trả sách', 'SV045'),
+	('2023-09-01', '2023-09-08', N'Đã trả', 'SV006'),
+    ('2023-09-02', '2023-09-09', N'Đã trả', 'SV006'),
+    ('2023-09-03', '2023-09-10', N'Đã trả', 'SV006'),
+    ('2023-09-04', '2023-09-11', N'Đã trả', 'SV006'),
+    ('2023-09-05', '2023-09-12', N'Đã trả', 'SV006'),
+    ('2023-09-06', '2023-09-13', N'Đã trả', 'SV006'),
+    ('2023-09-07', '2023-09-14', N'Đã trả', 'SV006'),
+    ('2023-09-08', '2023-09-15', N'Đã trả', 'SV006'),
+    ('2023-09-09', '2023-09-16', N'Đã trả', 'SV006'),
+    ('2023-09-10', '2023-09-17', N'Chưa trả sách', 'SV006'),
+    ('2023-09-11', '2023-09-18', N'Đã trả', 'SV006'),
+    ('2023-09-12', '2023-09-19', N'Đã trả', 'SV006'),
+    ('2023-09-13', '2023-09-20', N'Đã trả', 'SV006'),
+    ('2023-09-14', '2023-09-21', N'Đã trả', 'SV006'),
+    ('2023-09-15', '2023-09-22', N'Đã trả', 'SV006'),
+    ('2023-09-16', '2023-09-23', N'Đã trả', 'SV006'),
+    ('2023-09-17', '2023-09-24', N'Đã trả', 'SV006'),
+    ('2023-09-18', '2023-09-25', N'Đã trả', 'SV006'),
+    ('2023-09-19', '2023-09-26', N'Đã trả', 'SV006'),
+    ('2023-09-20', '2023-09-27', N'Đã trả', 'SV006');
+GO
+
+-- PHIEUMUONCHITIET
+INSERT INTO PHIEUMUONCHITIET (MaPhieuMuonChiTiet, SoThuTu, GhiChu, MaPhieuMuon, MaNhaXuatBan, MaSach)
+VALUES 
+    ('PMCT006', 1, N'Phiếu mượn số 1',  1 ,'NXB006', 'MS006'),
+    ('PMCT007', 1, N'Phiếu mượn số 2', 2 , 'NXB007', 'MS007'),
+    ('PMCT008', 1, N'Phiếu mượn số 3',  3 , 'NXB008', 'MS008'),
+    ('PMCT009', 1, N'Phiếu mượn số 4', 4 , 'NXB009', 'MS009'),
+    ('PMCT010', 1, N'Phiếu mượn số 5',  5 , 'NXB010', 'MS010'),
+	('PMCT021', 1, N'Phiếu mượn số 6',  6 , 'NXB021', 'MS021'),
+    ('PMCT022', 1, N'Phiếu mượn số 7', 7 , 'NXB022', 'MS022'),
+    ('PMCT023', 1, N'Phiếu mượn số 8',  8 , 'NXB023', 'MS023'),
+    ('PMCT024', 1, N'Phiếu mượn số 9', 9 , 'NXB024', 'MS024'),
+    ('PMCT025', 1, N'Phiếu mượn số 10',  10 , 'NXB025', 'MS025'),
+    ('PMCT041', 1, N'Phiếu mượn số 11',  11 , 'NXB041', 'MS041'),
+    ('PMCT042', 1, N'Phiếu mượn số 12', 12 , 'NXB042', 'MS042'),
+    ('PMCT043', 1, N'Phiếu mượn số 13',  13 , 'NXB043', 'MS043'),
+    ('PMCT044', 1, N'Phiếu mượn số 14', 14 , 'NXB044', 'MS044'),
+    ('PMCT045', 1, N'Phiếu mượn số 15',  15 , 'NXB045', 'MS045'),
+	('PMCT006_15', 1, N'Phiếu mượn x',  16 ,'NXB006', 'MS006'),
+    ('PMCT006_16', 1, N'Phiếu mượn x',  17 ,'NXB006', 'MS006'),
+    ('PMCT006_17', 1, N'Phiếu mượn x',  18 ,'NXB006', 'MS006'),
+    ('PMCT006_18', 1, N'Phiếu mượn x',  19 ,'NXB006', 'MS006'),
+    ('PMCT006_19', 1, N'Phiếu mượn x',  20 ,'NXB006', 'MS006'),
+    ('PMCT006_20', 1, N'Phiếu mượn x',  21 ,'NXB006', 'MS006'),
+    ('PMCT006_21', 1, N'Phiếu mượn x',  22 ,'NXB006', 'MS006'),
+    ('PMCT006_22', 1, N'Phiếu mượn x',  23 ,'NXB006', 'MS006'),
+    ('PMCT006_23', 1, N'Phiếu mượn x',  24 ,'NXB006', 'MS006'),
+    ('PMCT006_24', 1, N'Phiếu mượn x',  25 ,'NXB006', 'MS006'),
+    ('PMCT006_25', 1, N'Phiếu mượn x',  26 ,'NXB006', 'MS006'),
+    ('PMCT006_26', 1, N'Phiếu mượn x',  27 ,'NXB006', 'MS006'),
+    ('PMCT006_27', 1, N'Phiếu mượn x',  28 ,'NXB006', 'MS006'),
+    ('PMCT006_28', 1, N'Phiếu mượn x',  29 ,'NXB006', 'MS006'),
+    ('PMCT006_29', 1, N'Phiếu mượn x',  30 ,'NXB006', 'MS006'),
+    ('PMCT006_30', 1, N'Phiếu mượn x',  31 ,'NXB006', 'MS006'),
+    ('PMCT006_31', 1, N'Phiếu mượn x',  32 ,'NXB006', 'MS006'),
+    ('PMCT006_32', 1, N'Phiếu mượn x',  33 ,'NXB006', 'MS006'),
+    ('PMCT006_33', 1, N'Phiếu mượn x',  34 ,'NXB006', 'MS006'),
+    ('PMCT006_34', 1, N'Phiếu mượn x',  35 ,'NXB006', 'MS006'),
+    ('PMCT006_35', 1, N'Phiếu mượn x',  36 ,'NXB006', 'MS006');
+GO
+
+
+-- Y6. Viết các câu truy vấn sau:
+USE HELLO
+GO
+
+-- 6.1 Liệt kê tất cả thông tin của các đầu sách gồm tên sách, mã sách, giá tiền , tác giả
+-- thuộc loại sách có mã “IT”.
+SELECT TENSACH, SACH.MASACH, GIATIEN, TACGIA.MaTacGia ,TENTACGIA
+FROM SACH INNER JOIN VIET ON SACH.MaSach = VIET.MaSach 
+INNER JOIN TACGIA ON TACGIA.MaTacGia = VIET.MaTacGia 
+WHERE MaLoai = 'IT'
+
+-- 6.2 Liệt kê các phiếu mượn gồm các thông tin mã phiếu mượn, mã sách , ngày mượn, mã
+-- sinh viên có ngày mượn trong tháng 01/2017.
+SELECT A.MaPhieuMuon, MaSach, NgayMuon, A.MaSinhVien
+FROM PHIEUMUON A 
+INNER JOIN PHIEUMUONCHITIET C ON A.MaPhieuMuon = C.MaPhieuMuon
+WHERE MONTH(NGAYMUON) = 1 AND YEAR(NGAYMUON) = 2017
+
+-- 6.3 Liệt kê các phiếu mượn chưa trả sách cho thư viên theo thứ tự tăng dần của ngày
+-- mượn sách.
+SELECT *
+FROM PHIEUMUON
+WHERE TrangThai LIKE N'%CHƯA TRẢ SÁCH%'
+ORDER BY NgayMuon
+
+-- 6.4 Liệt kê tổng số đầu sách của mỗi loại sách ( gồm mã loại sách, tên loại sách, tổng số
+--lượng sách mỗi loại).
+SELECT A.MaLoai, TenLoai, SUM(SLBS) as N'TỔNG SỐ LƯỢNG SÁCH MỖI LOẠI'
+FROM SACH A
+INNER JOIN LOAISACH B ON A.MaLoai = B.MaLoai
+GROUP BY A.MaLoai, TenLoai
+
+-- 6.5 Đếm xem có bao nhiêu lượt sinh viên đã mượn sách.
+--CÁCH HIỂU 1 ĐẾM SỐ LƯỢNG SINH VIÊN ĐÃ MƯỢN SÁCH
+SELECT COUNT(MaSinhVien) AS N'SINH VIÊN ĐÃ MƯỢN SÁCH'
+FROM PHIEUMUON 
+--CÁCH HIỂU 2 ĐẾM SỐ LƯỢNG SÁCH ĐƯỢC MƯỢN CỦA MỖI SINH VIÊN
+SELECT MaSinhVien, COUNT(*) AS N'SÁCH ĐÃ MƯỢN'
+FROM PHIEUMUON
+GROUP BY MaSinhVien
+--CÁCH HIỂU 3 ĐẾM SỐ LƯỢNG SINH VIÊN ĐÃ MƯỢN SÁCH ( MỖI SINH VIÊN RIÊNG BIỆT )
+SELECT DISTINCT COUNT(MaSinhVien)  AS N'SINH VIÊN ĐÃ MƯỢN SÁCH'
+FROM PHIEUMUON
+
+-- 6.6 Hiển thị tất cả các quyển sách có tiêu đề chứa từ khoá “SQL”.
+SELECT *
+FROM SACH
+WHERE TieuDe LIKE '%SQL%'
+
+-- 6.7 Hiển thị thông tin mượn sách gồm các thông tin: mã sinh viên, tên sinh viên, mã
+-- phiếu mượn, tiêu đề sách, ngày mượn, ngày trả. Sắp xếp thứ tự theo ngày mượn sách.
+SELECT A.MaSinhVien, TenSinhVien, B.MaPhieuMuon, TieuDe, NgayMuon, NgayTra
+FROM THESINHVIEN A
+INNER JOIN PHIEUMUON B ON A.MaSinhVien = B.MaSinhVien 
+INNER JOIN PHIEUMUONCHITIET C ON  C.MaPhieuMuon = B.MaPhieuMuon
+INNER JOIN SACH D ON C.MaSach = D.MaSach 
+ORDER BY NgayMuon
+
+-- 6.8 Liệt kê các đầu sách có lượt mượn lớn hơn 20 lần.
+--
+SELECT TenSach AS N'ĐẦU SÁCH CÓ LƯỢT MƯỢN LỚN HƠN 20'
+FROM SACH A 
+INNER JOIN PHIEUMUONCHITIET B ON A.MaSach = B.MaSach 
+INNER JOIN PHIEUMUON C ON C.MaPhieuMuon = B.MaPhieuMuon
+GROUP BY TenSach
+HAVING COUNT(MASINHVIEN) > 20
+
+-- 6.9 Viết câu lệnh cập nhật lại giá tiền của các quyển sách có ngày nhập kho trước năm
+-- 2014 giảm 30%.
+UPDATE SACH 
+SET GiaTien*= 0.7
+WHERE YEAR(NgayNhapKho) < 2014
+
+-- 6.10 Viết câu lệnh cập nhật lại trạng thái đã trả sách cho phiếu mượn của sinh viên có mã
+-- sinh viên PD12301 (ví dụ).
+UPDATE PHIEUMUON
+SET TrangThai = N'ĐÃ TRẢ SÁCH'
+WHERE MaSinhVien = 'PD12301'
+
+-- 6.11 Lập danh sách các phiếu mượn quá hạn chưa trả gồm các thông tin: mã phiếu mượn,
+-- tên sinh viên, email, danh sách các sách đã mượn, ngày mượn.
+SELECT D.MaPhieuMuon, TenSinhVien, Email, E.*, NGAYMUON
+INTO DANHSACHCACPHIEUMUONQUAHAN
+FROM PHIEUMUON A 
+INNER JOIN THESINHVIEN B ON A.MaSinhVien = B.MaSinhVien
+INNER JOIN THONGTINLIENHE C ON B.MaThongTin = C.MaThongTin
+INNER JOIN PHIEUMUONCHITIET D ON D.MaPhieuMuon = A.MaPhieuMuon
+INNER JOIN SACH E ON E.MaSach = D.MaSach
+WHERE DATEDIFF(DAY, NGAYMUON, NGAYTRA) > 7 AND TrangThai LIKE '%CHƯA TRẢ SÁCH%'
+
+-- 6.12 Viết câu lệnh cập nhật lại số lượng bản sao tăng lên 5 đơn vị đối với các đầu sách có
+-- lượt mượn lớn hơn 10
+UPDATE SACH
+SET SLBS += 5
+WHERE MaSach IN (
+	SELECT MaSach
+	FROM PHIEUMUONCHITIET A
+	INNER JOIN PHIEUMUON B ON A.MaPhieuMuon = B.MaPhieuMuon
+	GROUP BY MASACH
+	HAVING COUNT(MASINHVIEN) > 10 
+)
+
+-- 6.13 Viết câu lệnh xoá các phiếu mượn có ngày mượn và ngày trả trước „1/1/2010‟
+DELETE FROM PHIEUMUONCHITIET
+WHERE MaPhieuMuon IN (
+	SELECT MaPhieuMuon
+	FROM PHIEUMUON
+	WHERE NgayMuon < '01/01/2010' AND NgayTra < '01/01/2010' 
+)
+DELETE FROM PHIEUMUON
+WHERE NgayMuon < '01/01/2010' AND NgayTra < '01/01/2010'
+
+
+
+

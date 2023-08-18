@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+     * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    header h1 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 15px;
+      background-color: #333;
+      border-radius: 4px;
+    }
+
+    nav a:hover {
+      opacity: .8;
+    }
+
+    main {
+      display: flex;
+      height: 80vh;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #block {
+      width: 50px;
+      height: 50px;
+      background-color: blue;
+      position: relative;
+    }
+
+    button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: black;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s, opacity 0.3s;
+
+    }
+
+    button:hover {
+      opacity: 0.8;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #000;
+      color: #fff;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Animating element</h1>
+    <nav>
+      <a href="/bai1/index.html">Bài 1</a>
+      <a href="/bai2/index.html">Bài 2</a>
+      <a href="/bai3/index.html">Bài 3</a>
+      <a href="/bai4/index.html">Bài 4</a>
+      <a href="/bai5/index.html">Bài 5</a>
+    </nav>
+  </header>
+  <main>
+    <button onclick="toTheRight()">Go right</button>
+    <div id="block"></div>
+
+  </main>
+  <footer>
+    &copy; huydqpc07859
+  </footer>
+  <script>
+    let check = true;
+    let interval;
+    function toTheRight() {
+      if ((check = true)) {
+        clearInterval(interval);
+      }
+      let b = document.getElementById("block");
+      let x = 0;
+      interval = setInterval(function () {
+        if (x === 600) {
+          clearInterval(interval);
+        } else {
+          x++;
+          b.style.left = x + "px";
+          check = true;
+        }
+      }, 2);
+    }
+  </script>
+</body>
+
+</html>
